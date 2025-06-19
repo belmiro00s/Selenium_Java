@@ -5,13 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import base.BaseTest;
 
 public class NegativeLoginTests {
 
     @Test
-    public void testLoginInvalidUsername(){
-        WebDriver driver = new ChromeDriver();
+    @Parameters("browser")
+    public void testLoginInvalidUsername(@Optional("chrome") String browser){
+        BaseTest runBrowsers = new BaseTest();
+        WebDriver driver = runBrowsers.setUp(browser);
 
         driver.get("https://practicetestautomation.com/practice-test-login/");
         WebElement usernameInputField = driver.findElement(By.id("username"));
