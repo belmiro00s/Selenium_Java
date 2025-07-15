@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class LoginTests {
 
-    @Test
+    @Test(groups = {"negative", "regression"})
     public void testLoginInvalidUsername(){
         WebDriver driver = new ChromeDriver();
 
@@ -34,7 +34,8 @@ public class LoginTests {
         Assert.assertEquals(actualErrorMessage, expected_text_error);
     }
 
-    @Test
+
+    @Test(groups = {"negative", "regression"})
     public void testLoginInvalidPassword(){
         WebDriver driver = new ChromeDriver();
 
@@ -64,7 +65,7 @@ public class LoginTests {
 
 
 
-    @Test
+    @Test(groups = {"positive", "regression", "smoke"})
     public void testLoginFunctionality() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://practicetestautomation.com/practice-test-login/");

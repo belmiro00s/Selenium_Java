@@ -1,8 +1,23 @@
 <suite name="Smoke Tests Suites" parallel="tests" thread-count="4">
-    <test name="ChromeTest">
-        <parameter name="browser" value="chrome" />
+    <test name="Positive Login Test">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
         <classes>
             <class name="com.practicetestautomation.tests.login.LoginTests"/>
+        </classes>
+    </test>
+
+    <test name="Negative Login Tests">
+        <classes>
+            <class name="com.practicetestautomation.tests.login.LoginTests">
+                <methods>
+                    <include name="testLoginInvalidUsername"/>
+                    <include name="testLoginInvalidPassword"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
