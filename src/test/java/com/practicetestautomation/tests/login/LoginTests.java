@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class NegativeLoginTests {
+public class LoginTests {
 
     @Test
     public void testLoginInvalidUsername(){
@@ -45,7 +45,7 @@ public class NegativeLoginTests {
 
         WebElement passwordInputField = driver.findElement(By.id("password"));
         passwordInputField.sendKeys("wrong_password");
-
+                      
         WebElement submitButton = driver.findElement(By.className("btn"));
         submitButton.click();
 
@@ -62,6 +62,42 @@ public class NegativeLoginTests {
         Assert.assertEquals(actualErrorMessage, expected_text_error);
     }
 
+
+
+    @Test
+    public void testLoginFunctionality() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://practicetestautomation.com/practice-test-login/");
+
+        WebElement usernameInputField = driver.findElement(By.id("username"));
+        usernameInputField.sendKeys("student");
+
+        WebElement usernamePasswordField = driver.findElement(By.id("password"));
+        usernamePasswordField.sendKeys("Password123");
+
+        WebElement submitButton = driver.findElement(By.className("btn"));
+        submitButton.click();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        String expected_url = "https://practicetestautomation.com/logged-in-successfully/";
+
+        String actual_url = driver.getCurrentUrl();
+        Assert.assertEquals(actual_url, expected_url);
+
+        String expected_text = "Congratulations student. You successfully logged in!";
+
+        String pageSource = driver.getPageSource();
+        Assert.assertTrue(pageSource.contains(expected_text));
+
+        WebElement logoutButton = driver.findElement(By.linkText("Log out"));
+        Assert.assertTrue(logoutButton.isDisplayed());
+        driver.quit();
+    }
 }
 
 
